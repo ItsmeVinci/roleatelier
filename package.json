@@ -1,13 +1,47 @@
 {
-  "name": "roleatelier",
+  "name": "@itsmevinci/roleatelier",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "description": "Local-first job search cockpit: aggregate listings, score fit, tailor documents, autofill applications, track the pipeline.",
   "license": "Apache-2.0",
-  "author": "RoleAtelier",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "author": "ItsmeVinci",
   "productName": "RoleAtelier",
+  "desktopName": "RoleAtelier",
   "main": "dist/electron/main.cjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ItsmeVinci/roleatelier.git"
+  },
+  "homepage": "https://github.com/ItsmeVinci/roleatelier#readme",
+  "bugs": {
+    "url": "https://github.com/ItsmeVinci/roleatelier/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "files": [
+    "dist/electron/**/*",
+    "dist/server/**/*",
+    "dist/web/**/*",
+    "electron/**/*",
+    "server/**/*",
+    "shared/**/*",
+    "web/**/*",
+    "scripts/**/*",
+    "build/icon.ico",
+    "build/icon.icns",
+    "build/icon.png",
+    "build/icon-1024.png",
+    "build/icon.svg",
+    "build/icon.html",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "dev:web": "vite",
@@ -22,6 +56,11 @@
     "desktop": "npm run build:app && electron .",
     "dist": "npm run build:app && electron-builder --win",
     "dist:portable": "npm run build:app && electron-builder --win portable",
+    "dist:mac": "npm run build:app && electron-builder --mac",
+    "dist:linux": "npm run build:app && electron-builder --linux",
+    "icons": "node scripts/make-icon.mjs",
+    "verify:package": "node scripts/verify-package.mjs",
+    "verify:npm": "node scripts/verify-npm-package.mjs",
     "typecheck": "tsc --noEmit",
     "smoke": "tsx scripts/smoke.ts"
   },
@@ -37,6 +76,7 @@
     "unpdf": "^1.9.1"
   },
   "devDependencies": {
+    "@electron/asar": "^4.3.1",
     "@types/express": "^4.17.25",
     "@types/multer": "^2.3.0",
     "@types/node": "^26.6.5",
@@ -46,6 +86,7 @@
     "electron": "^45.0.0",
     "electron-builder": "^26.15.3",
     "esbuild": "^0.28.2",
+    "png2icons": "^2.0.1",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vite": "^8.3.5"
@@ -74,6 +115,14 @@
       {
         "from": "build/icon.ico",
         "to": "icon.ico"
+      },
+      {
+        "from": "build/icon.icns",
+        "to": "icon.icns"
+      },
+      {
+        "from": "build/icon-1024.png",
+        "to": "icon.png"
       }
     ],
     "win": {
@@ -105,6 +154,62 @@
     },
     "portable": {
       "artifactName": "${productName}-${version}-portable.${ext}"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.productivity",
+      "darkModeSupport": true,
+      "icon": "build/icon.icns",
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "identity": null
+    },
+    "dmg": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "title": "${productName} ${version}"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility",
+      "icon": "build/icon-1024.png",
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "executableName": "roleatelier",
+      "syncDesktopName": true,
+      "maintainer": "ItsmeVinci <88784227+ItsmeVinci@users.noreply.github.com>",
+      "synopsis": "Local-first job search cockpit",
+      "description": "Aggregate job listings, score fit, tailor documents, autofill applications, and track your pipeline locally."
+    },
+    "deb": {
+      "packageName": "roleatelier"
     }
   }
 }

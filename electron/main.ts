@@ -1,11 +1,11 @@
-import { app, BrowserWindow, Menu, dialog, shell } from 'electron';
+import { app, BrowserWindow, Menu, dialog, shell, type MenuItemConstructorOptions } from 'electron';
 import { spawn, type ChildProcess } from 'node:child_process';
 import { createWriteStream, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:net';
 import path from 'node:path';
 
 app.setName('RoleAtelier');
-app.setAppUserModelId('com.roleatelier.local');
+app.setAppUserModelId('com.roleatelier.desktop');
 
 const APP_TITLE = 'RoleAtelier';
 const isWindows = process.platform === 'win32';
@@ -37,7 +37,7 @@ if (!gotTheLock) {
   });
 
   app.on('window-all-closed', () => {
-    app.quit();
+    if (process.platform !== 'darwin') app.quit();
   });
 
   app.on('before-quit', () => {
@@ -53,6 +53,14 @@ async function boot(): Promise<void> {
   }
 
   Menu.setApplicationMenu(buildMenu());
+
+  if (appUrl) {
+    const window = createWindow(appUrl);
+    window.show();
+    window.focus();
+    return;
+  }
+
   const window = createWindow('data:text/html;charset=utf-8,' + encodeURIComponent(splashHtml()));
 
   try {
@@ -146,9 +154,14 @@ function packagedPaths(): { server: string; web: string } {
 }
 
 function iconPath(): string {
+  const name = process.platform === 'win32'
+    ? 'icon.ico'
+    : process.platform === 'darwin'
+      ? 'icon.icns'
+      : 'icon.png';
   return app.isPackaged
-    ? path.join(process.resourcesPath, 'icon.ico')
-    : path.join(app.getAppPath(), 'build', 'icon.ico');
+    ? path.join(process.resourcesPath, name)
+    : path.join(app.getAppPath(), 'build', name);
 }
 
 function logFile(): string {
@@ -265,68 +278,97 @@ function buildMenu(): Menu {
     ? path.resolve(process.env.ROLEATELIER_DATA)
     : path.join(app.getPath('userData'), 'data');
 
-  return Menu.buildFromTemplate([
+  const template: MenuItemConstructorOptions[] = [];
+
+  if (process.platform === 'darwin') {
+    template.push({ role: 'appMenu' });
+  }
+
+  const fileMenu: MenuItemConstructorOptions[] = [
     {
-      label: 'File',
-      submenu: [
-        {
-          label: 'Open data folder',
-          click: () => {
-            mkdirSync(dataDir, { recursive: true });
-            void shell.openPath(dataDir);
-          },
-        },
-        {
-          label: 'Open log file',
-          click: () => {
-            const log = logFile();
-            if (existsSync(log)) shell.showItemInFolder(log);
-            else void shell.openPath(path.dirname(log));
-          },
-        },
-        { type: 'separator' },
-        { label: 'Quit', accelerator: 'Alt+F4', role: 'quit' },
-      ],
+      label: 'Open data folder',
+      click: () => {
+        mkdirSync(dataDir, { recursive: true });
+        void shell.openPath(dataDir);
+      },
     },
     {
-      label: 'View',
-      submenu: [
-        { role: 'reload' },
-        { role: 'forceReload' },
-        { role: 'toggleDevTools' },
-        { type: 'separator' },
-        { role: 'resetZoom' },
-        { role: 'zoomIn' },
-        { role: 'zoomOut' },
-        { type: 'separator' },
-        { role: 'togglefullscreen' },
-      ],
+      label: 'Open log file',
+      click: () => {
+        const log = logFile();
+        if (existsSync(log)) shell.showItemInFolder(log);
+        else void shell.openPath(path.dirname(log));
+      },
     },
-    {
-      label: 'Help',
-      submenu: [
-        {
-          label: 'About RoleAtelier',
-          click: () => {
-            void dialog.showMessageBox({
-              type: 'info',
-              title: 'About RoleAtelier',
-              message: `RoleAtelier ${app.getVersion()}`,
-              detail:
-                'A local-first job search cockpit.\n\nAll profile, job and application data stays on this machine.\n\nRoleAtelier never submits applications for you.',
-              buttons: ['OK'],
-            });
-          },
+  ];
+  if (process.platform !== 'darwin') {
+    fileMenu.push(
+      { type: 'separator' },
+      { label: 'Quit', accelerator: 'Alt+F4', role: 'quit' },
+    );
+  }
+  template.push({ label: 'File', submenu: fileMenu });
+
+  template.push({
+    label: 'Edit',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      { role: 'delete' },
+      { type: 'separator' },
+      { role: 'selectAll' },
+    ],
+  });
+
+  template.push({
+    label: 'View',
+    submenu: [
+      { role: 'reload' },
+      { role: 'forceReload' },
+      { role: 'toggleDevTools' },
+      { type: 'separator' },
+      { role: 'resetZoom' },
+      { role: 'zoomIn' },
+      { role: 'zoomOut' },
+      { type: 'separator' },
+      { role: 'togglefullscreen' },
+    ],
+  });
+
+  if (process.platform === 'darwin') {
+    template.push({ role: 'windowMenu' });
+  }
+
+  template.push({
+    label: 'Help',
+    submenu: [
+      {
+        label: 'About RoleAtelier',
+        click: () => {
+          void dialog.showMessageBox({
+            type: 'info',
+            title: 'About RoleAtelier',
+            message: `RoleAtelier ${app.getVersion()}`,
+            detail:
+              'A local-first job search cockpit.\n\nAll profile, job and application data stays on this machine.\n\nRoleAtelier never submits applications for you.',
+            buttons: ['OK'],
+          });
         },
-        {
-          label: 'Open project folder',
-          click: () => {
-            if (!app.isPackaged) void shell.openPath(app.getAppPath());
-          },
+      },
+      {
+        label: 'Open project folder',
+        click: () => {
+          if (!app.isPackaged) void shell.openPath(app.getAppPath());
         },
-      ],
-    },
-  ]);
+      },
+    ],
+  });
+
+  return Menu.buildFromTemplate(template);
 }
 
 function fatal(err: unknown): void {

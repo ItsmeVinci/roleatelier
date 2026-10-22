@@ -11,6 +11,13 @@ build/edge-profile/
 *.db
 *.db-shm
 *.db-wal
+*.sqlite
+*.sqlite3
 *.log
+*.backup.json
+roleatelier-backup-*.json
+roleatelier-applications-*.csv
+.env
+.env.*
 .DS_Store
 Thumbs.db
