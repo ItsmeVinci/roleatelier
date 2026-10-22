@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JobPilot · autofill test form</title>
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; padding: 40px 20px;
+        background: radial-gradient(900px 500px at 10% -10%, rgba(110,231,183,.08), transparent 60%), #080a0d;
+        color: #e8edf4; font: 14px/1.55 -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      }
+      .wrap { max-width: 760px; margin: 0 auto; }
+      .back { color: #8b95a5; text-decoration: none; font-size: 12.5px; }
+      .back:hover { color: #6ee7b7; }
+      .card { margin-top: 16px; padding: 28px; border: 1px solid rgba(255,255,255,.09); border-radius: 18px; background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012)); }
+      h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: -.5px; }
+      .sub { color: #8b95a5; margin: 0 0 22px; font-size: 13px; }
+      .note { font-size: 12.5px; color: #a7f3d0; background: rgba(110,231,183,.07); border: 1px solid rgba(110,231,183,.2); border-radius: 10px; padding: 10px 13px; margin-bottom: 22px; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .full { grid-column: 1 / -1; }
+      label { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: .4px; color: #8b95a5; font-weight: 600; margin-bottom: 6px; }
+      input, select, textarea {
+        width: 100%; padding: 10px 12px; border-radius: 10px; font: inherit; color: #e8edf4;
+        background: rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.14);
+      }
+      input:focus, select:focus, textarea:focus { outline: none; border-color: #6ee7b7; box-shadow: 0 0 0 3px rgba(110,231,183,.12); }
+      textarea { min-height: 120px; resize: vertical; }
+      select { appearance: none; }
+      .submit { margin-top: 22px; display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 10px; border: 0; font-weight: 650; background: linear-gradient(140deg,#7ff0c4,#4ade9b); color: #052e1f; cursor: pointer; }
+      .submit:disabled { opacity: .5; cursor: not-allowed; }
+      .hint { font-size: 11.5px; color: #66707f; margin-top: 10px; }
+      .ok { margin-top: 14px; font-size: 13px; color: #6ee7b7; display: none; }
+      .ok.show { display: block; }
+      @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← Back to JobPilot</a>
+      <div class="card">
+        <h1>Senior Backend Engineer</h1>
+        <p class="sub">Northwind Systems · Remote (EU) · This is a local test form, not a real application.</p>
+        <div class="note">
+          Drag the JobPilot bookmarklet to your bookmarks bar, open this page, then click it. Nothing is sent anywhere —
+          the form has no action.
+        </div>
+
+        <form id="demo-form" onsubmit="event.preventDefault(); document.getElementById('ok').classList.add('show');">
+          <div class="grid">
+            <div><label for="firstName">First name</label><input id="firstName" name="firstName" autocomplete="given-name" placeholder="First name" /></div>
+            <div><label for="lastName">Last name</label><input id="lastName" name="lastName" autocomplete="family-name" placeholder="Last name" /></div>
+            <div><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" /></div>
+            <div><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 000 0000" /></div>
+            <div><label for="city">City</label><input id="city" name="city" autocomplete="address-level2" placeholder="City" /></div>
+            <div><label for="linkedin">LinkedIn profile</label><input id="linkedin" name="linkedin" placeholder="linkedin.com/in/you" /></div>
+            <div><label for="github">GitHub</label><input id="github" name="github" placeholder="github.com/you" /></div>
+            <div><label for="website">Portfolio / website</label><input id="website" name="website" placeholder="you.dev" /></div>
+            <div><label for="years">Years of experience</label><input id="years" name="yearsExperience" type="number" placeholder="8" /></div>
+            <div><label for="salary">Desired salary</label><input id="salary" name="salary" placeholder="120000" /></div>
+            <div class="full">
+              <label for="auth">Are you authorised to work in the EU?</label>
+              <select id="auth" name="workAuthorized">
+                <option value="">Please select…</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div class="full">
+              <label for="cover">Cover letter</label>
+              <textarea id="cover" name="coverLetter" placeholder="Tell us why you are a great fit…"></textarea>
+            </div>
+            <div class="full">
+              <label for="why">Why do you want to work here?</label>
+              <textarea id="why" name="whyCompany" placeholder="A short answer…"></textarea>
+            </div>
+            <div class="full">
+              <label for="resume">Resume (PDF)</label>
+              <input id="resume" name="resume" type="file" accept=".pdf,.docx" />
+              <div class="hint">Browsers never let a bookmarklet attach a file. JobPilot reminds you instead.</div>
+            </div>
+          </div>
+
+          <button class="submit" type="submit">Submit application</button>
+          <div class="ok" id="ok">Submitted locally — nothing left your machine.</div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

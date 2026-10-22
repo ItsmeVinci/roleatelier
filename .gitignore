@@ -1,0 +1,16 @@
+node_modules/
+dist/
+release/
+data/
+.verify-data/
+.verify-check/
+.desktop-*
+.portable-*
+build/edge-profile/
+
+*.db
+*.db-shm
+*.db-wal
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,30 @@
+Vinod Kumar
+Senior Backend Engineer
+vinod@example.com | +1 415 555 0134 | San Francisco, CA
+linkedin.com/in/vinodkumar | github.com/vinodk
+
+Summary
+Backend engineer with 8 years building distributed systems, data pipelines and developer tooling.
+
+Skills
+Rust, TypeScript, Go, Python, PostgreSQL, Redis, Kafka, AWS, Docker, Kubernetes, gRPC, GraphQL, React
+
+Experience
+Senior Backend Engineer — Northwind Systems (2021–present)
+- Led the migration of a monolithic billing service to event-driven microservices in Go, cutting p99 latency 42%.
+- Built a Rust ingestion pipeline handling 1.2M events per minute with exactly-once delivery.
+- Designed PostgreSQL partitioning and caching strategy that reduced monthly query cost by 60%.
+- Mentored four engineers and ran the on-call rotation for a platform serving 40M requests a day.
+Backend Engineer — Contoso Cloud (2018–2021)
+- Shipped a multi-tenant gRPC API used by 300+ enterprise customers.
+- Automated infrastructure with Terraform and Kubernetes, cutting deploy time from 40 minutes to 6.
+- Added end-to-end tracing with OpenTelemetry across 12 services.
+Software Engineer — Initech (2016–2018)
+- Built internal React tooling used by the support team to resolve tickets 25% faster.
+
+Projects
+JobPilot — local job search cockpit (2026)
+- Built a TypeScript and React app with SQLite storage, multi-source job ingestion and a cross-portal autofill bookmarklet.
+
+Education
+B.S. Computer Science — State University (2016)
