@@ -23,7 +23,7 @@ Software Engineer — Initech (2016–2018)
 - Built internal React tooling used by the support team to resolve tickets 25% faster.
 
 Projects
-JobPilot — local job search cockpit (2026)
+RoleAtelier — local job search cockpit (2026)
 - Built a TypeScript and React app with SQLite storage, multi-source job ingestion and a cross-portal autofill bookmarklet.
 
 Education

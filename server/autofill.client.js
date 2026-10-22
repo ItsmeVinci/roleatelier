@@ -13,7 +13,7 @@
   try {
     data = decode(B64);
   } catch (e) {
-    alert('JobPilot: the autofill payload could not be read. Re-drag the button from the Autofill page.');
+    alert('RoleAtelier: the autofill payload could not be read. Re-drag the button from the Autofill page.');
     return;
   }
 
@@ -236,10 +236,10 @@
     if (value && setValue(el, value)) filled++;
   });
 
-  var existing = document.getElementById('__jobpilot_toast__');
+  var existing = document.getElementById('__roleatelier_toast__');
   if (existing) existing.remove();
   var toast = document.createElement('div');
-  toast.id = '__jobpilot_toast__';
+  toast.id = '__roleatelier_toast__';
   toast.style.cssText = [
     'position:fixed', 'z-index:2147483647', 'right:18px', 'bottom:18px', 'max-width:340px',
     'background:#101318', 'color:#e7ecf3', 'border:1px solid rgba(110,231,183,.35)',
@@ -248,7 +248,7 @@
     'box-shadow:0 18px 50px rgba(0,0,0,.45)', 'letter-spacing:.1px',
   ].join(';');
   toast.innerHTML =
-    '<div style="font-weight:650;color:' + ACCENT + ';margin-bottom:4px">JobPilot filled ' + filled + ' field' + (filled === 1 ? '' : 's') + '</div>' +
+    '<div style="font-weight:650;color:' + ACCENT + ';margin-bottom:4px">RoleAtelier filled ' + filled + ' field' + (filled === 1 ? '' : 's') + '</div>' +
     (skippedFilled ? '<div style="opacity:.65;font-size:12px">' + skippedFilled + ' already had a value — left alone.</div>' : '') +
     (files ? '<div style="opacity:.65;font-size:12px;margin-top:4px">Attach your resume manually (' + files + ' upload field' + (files === 1 ? '' : 's') + ').</div>' : '') +
     '<div style="opacity:.45;font-size:11px;margin-top:8px">Review every answer before submitting.</div>';

@@ -143,7 +143,7 @@ export default function Autofill() {
                   }}
                 >
                   <Icon name="zap" size={16} />
-                  Fill with JobPilot
+                  Fill with RoleAtelier
                 </a>
                 <div className="row" style={{ marginTop: 12, gap: 8 }}>
                   <button className="btn btn-sm" onClick={generate} disabled={generating}>
@@ -176,15 +176,15 @@ export default function Autofill() {
           <section className="card card-pad">
             <div className="section-title">3 · On the application page</div>
             <div className="steps">
-              <div className="step">Fill in your profile, skills and resume in JobPilot — the bookmarklet reads that saved data.</div>
+              <div className="step">Fill in your profile, skills and resume in RoleAtelier — the bookmarklet reads that saved data.</div>
               <div className="step">Open the real application form in a new tab, ideally before typing anything.</div>
-              <div className="step">Click <strong>Fill with JobPilot</strong> in your bookmarks bar. A toast reports how many fields were filled.</div>
+              <div className="step">Click <strong>Fill with RoleAtelier</strong> in your bookmarks bar. A toast reports how many fields were filled.</div>
               <div className="step">Review every field, attach your resume (browsers block scripts from setting file inputs), then submit yourself.</div>
             </div>
             <div className="alert" style={{ marginTop: 16 }}>
               <Icon name="alert" size={15} />
               <div>
-                JobPilot deliberately does not auto-submit. Automated submissions violate the terms of most boards and get
+                RoleAtelier deliberately does not auto-submit. Automated submissions violate the terms of most boards and get
                 accounts and domains banned — the one-click review is the part that keeps you employable.
               </div>
             </div>
@@ -268,7 +268,7 @@ export default function Autofill() {
               </div>
               <div>
                 <strong style={{ color: 'var(--text)' }}>Yes/no questions.</strong> Add them as saved answers with the exact
-                wording — JobPilot matches at 70% word overlap.
+                wording — RoleAtelier matches at 70% word overlap.
               </div>
             </div>
             <button className="btn btn-sm" style={{ marginTop: 14 }} onClick={() => (window.location.hash = '/profile')}>

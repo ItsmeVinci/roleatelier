@@ -47,8 +47,8 @@ app.use('/api', (_req, res) => {
   res.status(404).json({ error: 'Unknown API endpoint' });
 });
 
-const dist = process.env.JOBPILOT_WEB
-  ? path.resolve(process.env.JOBPILOT_WEB)
+const dist = process.env.ROLEATELIER_WEB
+  ? path.resolve(process.env.ROLEATELIER_WEB)
   : path.join(ROOT, 'dist', 'web');
 if (existsSync(path.join(dist, 'index.html'))) {
   app.use(express.static(dist, {
@@ -64,7 +64,7 @@ if (existsSync(path.join(dist, 'index.html'))) {
     res
       .type('html')
       .send(`<!doctype html><html><body style="font:16px/1.6 system-ui;background:#0b0d10;color:#e6e9ef;padding:48px">
-        <h1 style="margin:0 0 8px">JobPilot API is running</h1>
+        <h1 style="margin:0 0 8px">RoleAtelier API is running</h1>
         <p style="color:#9aa4b2">The web app has not been built yet. Run <code>npm run dev</code> (hot reload)
         or <code>npm run build &amp;&amp; npm start</code>.</p>
         <p><a style="color:#6ee7b7" href="/api/health">/api/health</a></p>
@@ -76,7 +76,7 @@ app.use(errorHandler);
 
 const server = app.listen(PORT, HOST, () => {
   const url = `http://${HOST}:${PORT}`;
-  console.log(`\n  JobPilot  ${url}\n`);
+  console.log(`\n  RoleAtelier  ${url}\n`);
   if (process.argv.includes('--open')) openBrowser(url);
 });
 

@@ -1,12 +1,12 @@
 {
-  "name": "jobpilot",
+  "name": "roleatelier",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "description": "Local-first job search cockpit: aggregate listings, score fit, tailor documents, autofill applications, track the pipeline.",
   "license": "Apache-2.0",
-  "author": "JobPilot",
-  "productName": "JobPilot",
+  "author": "RoleAtelier",
+  "productName": "RoleAtelier",
   "main": "dist/electron/main.cjs",
   "scripts": {
     "dev": "node scripts/dev.mjs",
@@ -51,9 +51,9 @@
     "vite": "^8.3.5"
   },
   "build": {
-    "appId": "com.jobpilot.desktop",
-    "productName": "JobPilot",
-    "copyright": "Copyright © 2026 JobPilot",
+    "appId": "com.roleatelier.desktop",
+    "productName": "RoleAtelier",
+    "copyright": "Copyright © 2026 RoleAtelier",
     "directories": {
       "output": "release",
       "buildResources": "build"
@@ -100,8 +100,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "JobPilot",
-      "uninstallDisplayName": "JobPilot"
+      "shortcutName": "RoleAtelier",
+      "uninstallDisplayName": "RoleAtelier"
     },
     "portable": {
       "artifactName": "${productName}-${version}-portable.${ext}"

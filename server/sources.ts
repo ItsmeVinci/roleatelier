@@ -36,7 +36,7 @@ export interface DiscoverOptions {
   country?: string;
 }
 
-const UA = 'JobPilot/0.1 (+local job search tool; contact: local user)';
+const UA = 'RoleAtelier/0.1 (+local job search tool; contact: local user)';
 
 export const SOURCE_META: Omit<SourceInfo, 'count' | 'lastFetched'>[] = [
   {
@@ -118,7 +118,7 @@ export const SOURCE_META: Omit<SourceInfo, 'count' | 'lastFetched'>[] = [
     name: 'Manual / URL import',
     homepage: '',
     requiresKey: false,
-    description: 'Paste any job URL; JobPilot reads the posting’s structured data.',
+    description: 'Paste any job URL; RoleAtelier reads the posting’s structured data.',
   },
 ];
 

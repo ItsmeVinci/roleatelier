@@ -45,7 +45,7 @@ systemRouter.get(
   '/export',
   wrap((_req, res) => {
     const payload = {
-      app: 'jobpilot',
+      app: 'roleatelier',
       version: 1,
       exportedAt: nowIso(),
       profile: getProfile(),
@@ -56,7 +56,7 @@ systemRouter.get(
       contacts: all('SELECT * FROM contacts ORDER BY id'),
       docs: all('SELECT * FROM docs ORDER BY id'),
     };
-    res.setHeader('content-disposition', `attachment; filename="jobpilot-backup-${new Date().toISOString().slice(0, 10)}.json"`);
+    res.setHeader('content-disposition', `attachment; filename="roleatelier-backup-${new Date().toISOString().slice(0, 10)}.json"`);
     res.type('application/json').send(JSON.stringify(payload, null, 2));
   }),
 );
@@ -65,7 +65,7 @@ systemRouter.post(
   '/import',
   wrap((req, res) => {
     const data = req.body;
-    if (!data || data.app !== 'jobpilot') return fail(res, 400, 'That is not a JobPilot backup file');
+    if (!data || data.app !== 'roleatelier') return fail(res, 400, 'That is not a RoleAtelier backup file');
     for (const key of ['jobs', 'applications', 'answers', 'events', 'contacts', 'docs']) {
       if (data[key] !== undefined && !Array.isArray(data[key])) return fail(res, 400, `Field “${key}” must be an array`);
     }
@@ -207,7 +207,7 @@ systemRouter.get(
     ];
     const esc = (v: unknown) => `"${String(v ?? '').replace(/"/g, '""')}"`;
     const csv = [cols.join(','), ...rows.map((r) => cols.map((c) => esc(r[c])).join(','))].join('\r\n');
-    res.setHeader('content-disposition', `attachment; filename="jobpilot-applications-${new Date().toISOString().slice(0, 10)}.csv"`);
+    res.setHeader('content-disposition', `attachment; filename="roleatelier-applications-${new Date().toISOString().slice(0, 10)}.csv"`);
     res.type('text/csv').send(csv);
   }),
 );

@@ -114,7 +114,7 @@ export default function Settings({ version, onChanged }: { version: number; onCh
       toast('Backup restored');
       setTimeout(() => window.location.reload(), 500);
     } catch (err) {
-      toast(err instanceof Error ? err.message : 'Import failed — the file may not be a JobPilot backup', 'err');
+      toast(err instanceof Error ? err.message : 'Import failed — the file may not be a RoleAtelier backup', 'err');
       setImporting(false);
     }
   }
@@ -354,12 +354,12 @@ export default function Settings({ version, onChanged }: { version: number; onCh
           <section className="card card-pad">
             <div className="section-title">About</div>
             <div className="col" style={{ gap: 6, fontSize: 12.5, color: 'var(--muted)' }}>
-              <div className="row"><span style={{ width: 90 }}>App</span><span style={{ color: 'var(--text)' }}>JobPilot 0.1.0</span></div>
+              <div className="row"><span style={{ width: 90 }}>App</span><span style={{ color: 'var(--text)' }}>RoleAtelier 0.1.0</span></div>
               <div className="row"><span style={{ width: 90 }}>Storage</span><span style={{ color: 'var(--text)' }}>SQLite, local</span></div>
               <div className="row"><span style={{ width: 90 }}>Network</span><span style={{ color: 'var(--text)' }}>Job boards only</span></div>
             </div>
             <div className="hint" style={{ marginTop: 12 }}>
-              JobPilot never submits an application for you. It is a reading-and-organising tool: fetch listings, score fit,
+              RoleAtelier never submits an application for you. It is a reading-and-organising tool: fetch listings, score fit,
               tailor documents, prefill forms, track replies.
             </div>
           </section>

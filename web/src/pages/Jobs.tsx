@@ -592,7 +592,7 @@ export default function Jobs({ version, onChanged }: { version: number; onChange
                   <div className="alert info" style={{ marginTop: 22 }}>
                     <Icon name="alert" size={15} />
                     <div>
-                      Apply in your own browser session. JobPilot prefills the form with the bookmarklet — you review and submit.
+                      Apply in your own browser session. RoleAtelier prefills the form with the bookmarklet — you review and submit.
                       Never auto-submit; most boards ban it and it burns your account.
                     </div>
                   </div>
@@ -658,7 +658,7 @@ export default function Jobs({ version, onChanged }: { version: number; onChange
               onKeyDown={(e) => e.key === 'Enter' && url.trim() && importUrl()}
             />
             <div className="hint">
-              JobPilot reads the page’s structured job data (JSON-LD, used by most ATSs). Pages without it still import the title
+              RoleAtelier reads the page’s structured job data (JSON-LD, used by most ATSs). Pages without it still import the title
               and description — check the details after adding.
             </div>
           </div>
@@ -692,7 +692,7 @@ export default function Jobs({ version, onChanged }: { version: number; onChange
         >
           <p className="hint" style={{ marginTop: 0 }}>
             Search LinkedIn, Indeed, Glassdoor and your configured Workday boards in a normal browser session. These sites
-            do not offer free public job APIs, so JobPilot opens a targeted search; paste an individual posting URL back
+            do not offer free public job APIs, so RoleAtelier opens a targeted search; paste an individual posting URL back
             into <strong>Add by URL</strong> to score and tailor it.
           </p>
 
@@ -735,7 +735,7 @@ export default function Jobs({ version, onChanged }: { version: number; onChange
           <div className="alert info" style={{ marginTop: 16 }}>
             <Icon name="alert" size={15} />
             <div>
-              JobPilot does not scrape these sites or submit applications for you. Open a role in your browser, then use the
+              RoleAtelier does not scrape these sites or submit applications for you. Open a role in your browser, then use the
               bookmarklet to prefill the form.
             </div>
           </div>
@@ -758,7 +758,7 @@ export default function Jobs({ version, onChanged }: { version: number; onChange
           }
         >
           <p style={{ marginTop: 0 }}>
-            JobPilot will take up to <strong>10 unstarted roles scoring 75 or higher</strong>, add them to your pipeline as{' '}
+            RoleAtelier will take up to <strong>10 unstarted roles scoring 75 or higher</strong>, add them to your pipeline as{' '}
             <strong>Saved</strong>, and generate a tailored resume and cover letter for each one.
           </p>
           <div className="alert">

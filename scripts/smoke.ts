@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const PORT = Number(process.env.SMOKE_PORT ?? 8799);
 const BASE = `http://127.0.0.1:${PORT}`;
-const dataDir = mkdtempSync(path.join(tmpdir(), 'jobpilot-smoke-'));
+const dataDir = mkdtempSync(path.join(tmpdir(), 'roleatelier-smoke-'));
 
 const resume = readFileSync(path.join(ROOT, 'samples', 'resume.txt'), 'utf8');
 
@@ -65,10 +65,10 @@ function stopServer(): void {
 try {
   const tsxBin = path.join(ROOT, 'node_modules', 'tsx', 'dist', 'cli.mjs');
   if (!existsSync(tsxBin)) throw new Error(`tsx CLI not found at ${tsxBin}`);
-  console.log(`\nJobPilot smoke test  (port ${PORT})\n`);
+  console.log(`\nRoleAtelier smoke test  (port ${PORT})\n`);
   child = spawn(process.execPath, [tsxBin, 'server/index.ts'], {
     cwd: ROOT,
-    env: { ...process.env, PORT: String(PORT), JOBPILOT_DATA: dataDir },
+    env: { ...process.env, PORT: String(PORT), ROLEATELIER_DATA: dataDir },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   let serverLog = '';
@@ -200,7 +200,7 @@ try {
   check('sources listed', sources.sources.length >= 6);
 
   const backup = await api('GET', '/api/export');
-  check('backup export', backup.app === 'jobpilot' && backup.jobs.length === jobs.length);
+  check('backup export', backup.app === 'roleatelier' && backup.jobs.length === jobs.length);
 
   const csv = await (await fetch(`${BASE}/api/applications.csv`)).text();
   check('csv export', csv.startsWith('id,company,title'));

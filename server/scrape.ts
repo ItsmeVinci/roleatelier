@@ -88,7 +88,7 @@ export async function scrapeJobUrl(input: string): Promise<ScrapedJob> {
   const res = await fetch(url.href, {
     headers: {
       'user-agent':
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 JobPilot/0.1',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 RoleAtelier/0.1',
       accept: 'text/html,application/xhtml+xml',
       'accept-language': 'en',
     },
@@ -157,7 +157,7 @@ export async function scrapeJobUrl(input: string): Promise<ScrapedJob> {
   if (job.description.length < 40) {
     job.description = [
       job.description,
-      `Imported from ${host}. JobPilot could not read the description from this page — open the posting for the full text.`,
+      `Imported from ${host}. RoleAtelier could not read the description from this page — open the posting for the full text.`,
     ]
       .filter(Boolean)
       .join('\n\n');

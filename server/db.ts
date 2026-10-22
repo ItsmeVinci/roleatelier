@@ -4,16 +4,16 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Job, Profile, SourceId } from '../shared/types.ts';
 
-export const ROOT = process.env.JOBPILOT_ROOT
-  ? path.resolve(process.env.JOBPILOT_ROOT)
+export const ROOT = process.env.ROLEATELIER_ROOT
+  ? path.resolve(process.env.ROLEATELIER_ROOT)
   : path.resolve(fileURLToPath(new URL('..', import.meta.url)));
-export const DATA_DIR = process.env.JOBPILOT_DATA
-  ? path.resolve(process.env.JOBPILOT_DATA)
+export const DATA_DIR = process.env.ROLEATELIER_DATA
+  ? path.resolve(process.env.ROLEATELIER_DATA)
   : path.join(ROOT, 'data');
 
 mkdirSync(DATA_DIR, { recursive: true });
 
-export const db = new DatabaseSync(path.join(DATA_DIR, 'jobpilot.db'));
+export const db = new DatabaseSync(path.join(DATA_DIR, 'roleatelier.db'));
 
 db.exec(`
 PRAGMA journal_mode = WAL;

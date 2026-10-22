@@ -4,10 +4,10 @@ import { createWriteStream, existsSync, mkdirSync, writeFileSync } from 'node:fs
 import { createServer } from 'node:net';
 import path from 'node:path';
 
-app.setName('JobPilot');
-app.setAppUserModelId('com.jobpilot.local');
+app.setName('RoleAtelier');
+app.setAppUserModelId('com.roleatelier.local');
 
-const APP_TITLE = 'JobPilot';
+const APP_TITLE = 'RoleAtelier';
 const isWindows = process.platform === 'win32';
 
 let mainWindow: BrowserWindow | null = null;
@@ -57,8 +57,8 @@ async function boot(): Promise<void> {
 
   try {
     const port = await freePort();
-    const dataDir = process.env.JOBPILOT_DATA
-      ? path.resolve(process.env.JOBPILOT_DATA)
+    const dataDir = process.env.ROLEATELIER_DATA
+      ? path.resolve(process.env.ROLEATELIER_DATA)
       : path.join(app.getPath('userData'), 'data');
     mkdirSync(dataDir, { recursive: true });
 
@@ -153,7 +153,7 @@ function iconPath(): string {
 
 function logFile(): string {
   if (!logPath) {
-    logPath = path.join(app.getPath('userData'), 'jobpilot.log');
+    logPath = path.join(app.getPath('userData'), 'roleatelier.log');
     mkdirSync(path.dirname(logPath), { recursive: true });
   }
   return logPath;
@@ -170,7 +170,7 @@ async function startServer(opts: { port: number; dataDir: string; serverEntry: s
   const log = logFile();
   writeFileSync(
     log,
-    `\n[${new Date().toISOString()}] Starting JobPilot ${app.getVersion()} on port ${opts.port}\n`,
+    `\n[${new Date().toISOString()}] Starting RoleAtelier ${app.getVersion()} on port ${opts.port}\n`,
     { flag: 'a' },
   );
   logStream = createWriteStream(log, { flags: 'a' });
@@ -179,9 +179,9 @@ async function startServer(opts: { port: number; dataDir: string; serverEntry: s
     ...process.env,
     PORT: String(opts.port),
     HOST: '127.0.0.1',
-    JOBPILOT_DATA: opts.dataDir,
-    JOBPILOT_ROOT: app.getAppPath(),
-    JOBPILOT_WEB: opts.webDir,
+    ROLEATELIER_DATA: opts.dataDir,
+    ROLEATELIER_ROOT: app.getAppPath(),
+    ROLEATELIER_WEB: opts.webDir,
     ELECTRON_RUN_AS_NODE: '1',
     NODE_ENV: 'production',
   };
@@ -201,7 +201,7 @@ async function startServer(opts: { port: number; dataDir: string; serverEntry: s
     if (quitting || serverFailed) return;
     serverFailed = true;
     dialog.showErrorBox(
-      'JobPilot server stopped',
+      'RoleAtelier server stopped',
       `The local server exited unexpectedly (code ${code ?? 'unknown'}).\n\nLog file:\n${log}`,
     );
     app.quit();
@@ -261,8 +261,8 @@ function stopServer(): void {
 }
 
 function buildMenu(): Menu {
-  const dataDir = process.env.JOBPILOT_DATA
-    ? path.resolve(process.env.JOBPILOT_DATA)
+  const dataDir = process.env.ROLEATELIER_DATA
+    ? path.resolve(process.env.ROLEATELIER_DATA)
     : path.join(app.getPath('userData'), 'data');
 
   return Menu.buildFromTemplate([
@@ -306,14 +306,14 @@ function buildMenu(): Menu {
       label: 'Help',
       submenu: [
         {
-          label: 'About JobPilot',
+          label: 'About RoleAtelier',
           click: () => {
             void dialog.showMessageBox({
               type: 'info',
-              title: 'About JobPilot',
-              message: `JobPilot ${app.getVersion()}`,
+              title: 'About RoleAtelier',
+              message: `RoleAtelier ${app.getVersion()}`,
               detail:
-                'A local-first job search cockpit.\n\nAll profile, job and application data stays on this machine.\n\nJobPilot never submits applications for you.',
+                'A local-first job search cockpit.\n\nAll profile, job and application data stays on this machine.\n\nRoleAtelier never submits applications for you.',
               buttons: ['OK'],
             });
           },
@@ -334,7 +334,7 @@ function fatal(err: unknown): void {
   const message = err instanceof Error ? err.message : String(err);
   console.error(message);
   try {
-    dialog.showErrorBox('JobPilot could not start', message);
+    dialog.showErrorBox('RoleAtelier could not start', message);
   } finally {
     app.quit();
   }
@@ -365,7 +365,7 @@ function splashHtml(): string {
 <body>
   <div class="box">
     <div class="mark">⚡</div>
-    <div class="name">JobPilot</div>
+    <div class="name">RoleAtelier</div>
     <div class="hint">Starting your local workspace…</div>
   </div>
 </body>

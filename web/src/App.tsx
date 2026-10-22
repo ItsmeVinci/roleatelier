@@ -104,7 +104,7 @@ function Shell() {
             <Icon name="zap" size={18} />
           </div>
           <div>
-            <div className="brand-name">JobPilot</div>
+            <div className="brand-name">RoleAtelier</div>
             <div className="brand-sub">Local cockpit</div>
           </div>
         </div>

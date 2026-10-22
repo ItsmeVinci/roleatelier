@@ -1,4 +1,4 @@
-# JobPilot
+# RoleAtelier
 
 A local-first job search cockpit: aggregate listings, score them against your profile, tailor a resume and cover letter, autofill application forms, and track every application from first click to offer.
 
@@ -6,7 +6,7 @@ Everything runs on your machine. There is no account, no cloud sync, and no auto
 
 ## Why no auto-submit
 
-Most job boards and applicant tracking systems prohibit automated submissions. Bots also produce low-quality applications that get accounts and domains banned. JobPilot fills what it can, leaves file uploads and custom widgets for you, and stops before Submit.
+Most job boards and applicant tracking systems prohibit automated submissions. Bots also produce low-quality applications that get accounts and domains banned. RoleAtelier fills what it can, leaves file uploads and custom widgets for you, and stops before Submit.
 
 ## Features
 
@@ -19,7 +19,7 @@ Most job boards and applicant tracking systems prohibit automated submissions. B
   - Adzuna (optional, requires a free developer app id and key)
   - Workday company career sites you add in Settings
   - Manual import of any posting URL with JSON-LD structured data
-- **Targeted board search** for LinkedIn, Indeed, Glassdoor and your saved Workday boards. These sites do not offer free public job APIs, so JobPilot opens a prefilled search in your browser instead of scraping them.
+- **Targeted board search** for LinkedIn, Indeed, Glassdoor and your saved Workday boards. These sites do not offer free public job APIs, so RoleAtelier opens a prefilled search in your browser instead of scraping them.
 - **75+ prep queue** that adds up to ten unstarted 75+ matches to your pipeline as Saved, generates a tailored resume and cover letter for each, and leaves every Submit button to you.
 - **Explainable fit score** from skills, title, seniority, salary, location and freshness. Every score shows its reasons, not just a number.
 - **Resume tailoring**: parses your resume into sections and bullets, ranks bullets by relevance to the job, and generates a focused version without inventing experience.
@@ -43,17 +43,17 @@ Most job boards and applicant tracking systems prohibit automated submissions. B
 
 Prebuilt Windows x64 artifacts are in `release/`:
 
-- `JobPilot-0.1.0-x64.exe` — installer with Start-menu and desktop shortcuts.
-- `JobPilot-0.1.0-portable.exe` — single-file portable app; no installation.
+- `RoleAtelier-0.1.0-x64.exe` — installer with Start-menu and desktop shortcuts.
+- `RoleAtelier-0.1.0-portable.exe` — single-file portable app; no installation.
 
-Double-click either one to start JobPilot. The desktop app opens its own window and starts a private local server on a random `127.0.0.1` port. Application links open in your default browser so the autofill bookmarklet keeps working.
+Double-click either one to start RoleAtelier. The desktop app opens its own window and starts a private local server on a random `127.0.0.1` port. Application links open in your default browser so the autofill bookmarklet keeps working.
 
-Desktop data is stored in `%APPDATA%\JobPilot\data` and logs in `%APPDATA%\JobPilot\jobpilot.log`. Use **File → Open data folder** or **File → Open log file** inside the app.
+Desktop data is stored in `%APPDATA%\RoleAtelier\data` and logs in `%APPDATA%\RoleAtelier\roleatelier.log`. Use **File → Open data folder** or **File → Open log file** inside the app.
 
 To build the desktop app yourself:
 
 ```bash
-cd jobpilot
+cd roleatelier
 npm install
 npm run desktop   # build and launch unpackaged
 npm run dist      # build installer + portable exe in release/
@@ -70,7 +70,7 @@ The generated installers are unsigned, so Windows SmartScreen may ask you to con
 ### Browser version
 
 ```bash
-cd jobpilot
+cd roleatelier
 npm install
 npm run app
 ```
@@ -94,7 +94,7 @@ The Vite dev server runs on <http://127.0.0.1:5173> and proxies `/api` to the ba
 5. Optionally click **Prep 75+ queue** to prepare the top ten unstarted 75+ matches with tailored documents.
 6. Open a promising role, review the score reasons, and click **Tailor resume** / **Tailor cover letter**.
 7. Move the role to **Saved** or **Applied** and set a next-action date.
-8. On the real application page, run the **Fill with JobPilot** bookmarklet, review every field, attach your resume, and submit yourself.
+8. On the real application page, run the **Fill with RoleAtelier** bookmarklet, review every field, attach your resume, and submit yourself.
 
 ## Job sources
 
@@ -112,7 +112,7 @@ The Vite dev server runs on <http://127.0.0.1:5173> and proxies `/api` to the ba
 | Glassdoor | No | Search-only link. Glassdoor's API is partner-only; import individual postings with **Add by URL**. |
 | Manual URL | No | Reads the posting's JSON-LD job data. |
 
-Source availability is outside JobPilot's control. A failing source shows an error in the sync result without blocking the others. Respect each site's terms and rate limits.
+Source availability is outside RoleAtelier's control. A failing source shows an error in the sync result without blocking the others. Respect each site's terms and rate limits.
 
 ### Workday setup
 
@@ -123,7 +123,7 @@ NVIDIA | https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite
 Salesforce | https://salesforce.wd12.myworkdayjobs.com/External_Career_Site
 ```
 
-Then select **Workday company boards** in the source list and fetch. JobPilot reads the same public job feed the career site uses, pulls descriptions for scoring, and links every result back to the employer's application page.
+Then select **Workday company boards** in the source list and fetch. RoleAtelier reads the same public job feed the career site uses, pulls descriptions for scoring, and links every result back to the employer's application page.
 
 ## How the fit score works
 
@@ -146,12 +146,12 @@ Scores are guidance, not a verdict. Read the reasons in the job drawer and use y
 
 **Jobs → Prep 75+ queue** takes up to ten unstarted roles scoring 75 or higher, adds them to the pipeline as **Saved**, and generates a tailored resume and cover letter for each. The result dialog links to the prepared roles and to the pipeline.
 
-This is a preparation queue, not an auto-apply bot. JobPilot never opens an employer form, fills it, or submits it without you. You review every document, run the bookmarklet on the employer's page, attach your files, and click Submit yourself. That keeps applications accurate and avoids the account bans that automated submissions cause.
+This is a preparation queue, not an auto-apply bot. RoleAtelier never opens an employer form, fills it, or submits it without you. You review every document, run the bookmarklet on the employer's page, attach your files, and click Submit yourself. That keeps applications accurate and avoids the account bans that automated submissions cause.
 
 ## Autofill bookmarklet
 
 1. Open **Autofill** and optionally choose an application to embed that role's cover letter.
-2. Drag **Fill with JobPilot** to your bookmarks bar.
+2. Drag **Fill with RoleAtelier** to your bookmarks bar.
 3. Open the employer's application form.
 4. Click the bookmarklet. A toast reports how many fields were filled and what was left alone.
 5. Review every value, attach your resume manually, and submit.
@@ -175,12 +175,12 @@ The bookmarklet payload is embedded in the bookmark URL, so re-drag it after cha
 
 ## Data and privacy
 
-- Browser version: the database lives at `data/jobpilot.db` by default.
-- Windows app: the database lives at `%APPDATA%\JobPilot\data\jobpilot.db`.
-- Set `JOBPILOT_DATA` to use a different directory.
+- Browser version: the database lives at `data/roleatelier.db` by default.
+- Windows app: the database lives at `%APPDATA%\RoleAtelier\data\roleatelier.db`.
+- Set `ROLEATELIER_DATA` to use a different directory.
 - Set `PORT` or `HOST` to change the listen address (defaults: `127.0.0.1:8787`).
 - The server rejects cross-origin requests from non-local origins.
-- Adzuna credentials, profile data, resumes and application notes never leave the machine except when JobPilot calls a job source API.
+- Adzuna credentials, profile data, resumes and application notes never leave the machine except when RoleAtelier calls a job source API.
 - Backups/export are explicit actions; nothing is uploaded automatically.
 
 ## Scripts
@@ -200,7 +200,7 @@ npm run smoke      # end-to-end smoke test on a temporary database and port
 ## Project layout
 
 ```text
-jobpilot/
+roleatelier/
   server/            Express API, SQLite, scoring, tailoring, autofill
   web/               Vite + React frontend
   electron/          Windows desktop shell (Electron main process)
@@ -219,6 +219,7 @@ jobpilot/
 - Salary parsing is heuristic. Check the original posting before relying on a number.
 - Document tailoring reorders and reframes your real experience. It does not invent employers, titles or achievements.
 - Workday career-site markup and feed behavior vary by employer and can change without notice.
-- LinkedIn, Indeed and Glassdoor are search-only. JobPilot does not scrape them, and their APIs require partner agreements.
-- JobPilot is a personal productivity tool, not legal or immigration advice. Work-authorization answers are yours to verify.
+- LinkedIn, Indeed and Glassdoor are search-only. RoleAtelier does not scrape them, and their APIs require partner agreements.
+- RoleAtelier is a personal productivity tool, not legal or immigration advice. Work-authorization answers are yours to verify.
+- RoleAtelier is an independent project and is not affiliated with any job board, employer, or applicant tracking system.
 - Use the tool in line with each job board's terms of service. Automated submission is intentionally not supported.
